@@ -1,25 +1,28 @@
 <link rel="stylesheet" href="styles/main.css">
 
-<header ng-show="snap">Snap!!!</header>
-
 <section id="game-table">
+
+  <header ng-show="snap">Snap!!!</header>
 
   <div class="row">
   <!--cpu cards-->
-  <div class="noturn">cpu</div>
+  <div ng-class="{turn:playerTurn,noturn:!playerTurn}">cpu</div>
 
   <!--centrepile-->
-  <div class="centre" ></div>
+  <div class="centre">
+    <h1>{{centrePileCards[0].number}}</h1>
+    <img ng-class="{'spade':centrePileCards[0].suit=='s','heart':centrePileCards[0].suit=='h','daimond':centrePileCards[0].suit=='d','club':centrePileCards[0].suit=='c'}"/>
+  </div>
 
   <!--player cards-->
-  <div class="turn" ng-click="pickCard()"></div>
+  <div ng-class="{turn:!playerTurn,noturn:playerTurn}" ng-click="pickCard();switchTurns()">player</div>
     </div>
 
 </section>
 
 <section id="game-controls">
-  <button>Snap</button>
-  <button ng-click="dealCards()">start</button>
+  <button>Check snap</button>
+  <button ng-click="dealCards();startGame()">start</button>
 </section>
 
 <section>slider</section>
