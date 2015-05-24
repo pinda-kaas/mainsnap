@@ -1,21 +1,19 @@
+<link rel="stylesheet" href="styles/main.css">
+
 <header ng-show="snap">Snap!!!</header>
 
 <section id="game-table">
 
-  {{playerTurn}}
+  <div class="row">
   <!--cpu cards-->
-  <div ng-class="{'turn':playerTurn==1,'noturn':playerTurn==0 }"></div>
+  <div class="noturn">cpu</div>
 
-
-  <!--image of the card goes here-->
-
-  <div class="{'spade':lastPickerCard.suit=='s'}"></div>
-
-  {{lastPickedCard.number}}
-  {{lastPickedCard.suit}}
+  <!--centrepile-->
+  <div class="centre" ></div>
 
   <!--player cards-->
-  <div ng-class="{'turn':playerTurn==0,'noturn':playerTurn==1 }" ng-click="pickCard(0)"></div>
+  <div class="turn" ng-click="pickCard()"></div>
+    </div>
 
 </section>
 

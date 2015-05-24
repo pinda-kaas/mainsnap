@@ -1,4 +1,4 @@
-describe('after calling dealcards', function() {
+describe('main ctrl tests', function() {
   beforeEach(module('snapApp'));
   var scope, createController;
 
@@ -45,9 +45,22 @@ describe('after calling dealcards', function() {
 
   it('should player be either 0 or 1 random',function(){
     var controller = createController();
+    scope.switchPlayerTurn();
+    var result=scope.playerTurn;
+    var bool = (result==1 || result==0);
+    expect(bool).toBe(true);
+  })
 
-
-
+  it('should pick one card from own pile and add to centrepile',function(){
+    var controller = createController();
+    scope.dealCards();
+    scope.playerTurn=0;
+    var oldLength = scope.playerCards.length;
+    var oldLengthCentre=scope.centrePileCards.length;
+    console.log('oldLength',oldLengthCentre);
+    scope.pickCard();
+    expect(scope.playerCards.length).toBe(oldLength-1);
+    expect(scope.centrePileCards.length).toBe(oldLengthCentre+1);
   })
 
 

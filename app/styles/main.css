@@ -1,79 +1,48 @@
-/* Space out content a bit */
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+.spade { background-position: 5px 0px; }
+.heart { background-position: -50px 0px; }
+.diamond { background-position: 5px -50px; }
+.club { background-position: -50px -50px; }
+
+.spade, .heart, .diamond, .club {
+	height: 50px; width: 50px;
+	background-image: url('../images/French_suits.svg');
+	background-repeat : no-repeat;
+  	overflow          : hidden;
+  	background-size: 100px auto;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+.noturn
+{
+	width: 100px;
+	height:200px;
+	border-radius: 25px;
+	background-color: red;
+  float:left;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
+.turn
+{
+	width: 100px;
+	height:200px;
+	border-radius: 25px;
+	background-color: green;
+  float:left;
 }
 
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+.centre
+{
+  width: 100px;
+  height:200px;
+  border-radius: 25px;
+  background-color: green;
+  float:left;
 }
 
-/* Customize container */
-@media (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-}
-.container-narrow > hr {
-  margin: 30px 0;
+.row{
+  width:100%;
+  /*display:block;*/
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+#game-controls{
+  clear:both;
 }
