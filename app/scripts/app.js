@@ -10,9 +10,6 @@
  */
  var app=angular
   .module('snapApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch'
