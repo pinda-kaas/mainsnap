@@ -6,23 +6,28 @@
 
   <div class="row">
   <!--cpu cards-->
-  <div ng-class="{turn:playerTurn,noturn:!playerTurn}">cpu</div>
+  <div ng-class="{turn:playerTurn,noturn:!playerTurn}" >cpu</div>
 
   <!--centrepile-->
   <div class="centre">
     <h1>{{centrePileCards[0].number}}</h1>
-    <img ng-class="{'spade':centrePileCards[0].suit=='s','heart':centrePileCards[0].suit=='h','daimond':centrePileCards[0].suit=='d','club':centrePileCards[0].suit=='c'}"/>
+    <img ng-class="{'spade':centrePileCards[0].suit=='s','heart':centrePileCards[0].suit=='h','diamond':centrePileCards[0].suit=='d','club':centrePileCards[0].suit=='c'}"/>
   </div>
 
   <!--player cards-->
-  <div ng-class="{turn:!playerTurn,noturn:playerTurn}" ng-click="pickCard();switchTurns()">player</div>
+  <div ng-class="{turn:!playerTurn,noturn:playerTurn}" ng-click="pickCard();">player</div>
     </div>
+
+
 
 </section>
 
 <section id="game-controls">
-  <button>Check snap</button>
-  <button ng-click="dealCards();startGame()">start</button>
+
+    <button>Check snap</button>
+    <button ng-click="dealCards()">start</button>
+
 </section>
+
 
 <section>slider</section>

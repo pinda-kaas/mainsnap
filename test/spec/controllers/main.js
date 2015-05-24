@@ -97,13 +97,13 @@ describe('main ctrl tests', function() {
   });
 
 
-  it('should pick one card from own pile and add to centrepile automatically when cpu',function(){
-    var controller = createController();
-    spyOn(scope,'pickCard')
-    scope.playerTurn=0;
-    scope.switchTurns();
-    expect(scope.pickCard).toHaveBeenCalled();
-  });
+  //it('should pick one card from own pile and add to centrepile automatically when cpu',function(){
+  //  var controller = createController();
+  //  spyOn(scope,'pickCard')
+  //  scope.playerTurn=0;
+  //  scope.switchTurns();
+  //  expect(scope.pickCard).toHaveBeenCalled();
+  //});
 
   it('should switch turns',function(){
     var controller = createController();
