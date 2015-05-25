@@ -54,13 +54,9 @@ describe('main ctrl tests', function() {
     scope.playerTurn=0;
     var oldLength = scope.playerCards.length;
     var oldLengthCentre=scope.centrePileCards.length;
-    console.log('oldLength player',oldLength);
-    console.log('oldLength centre',oldLengthCentre);
     scope.pickCard();
     expect(scope.playerCards.length).toBe(oldLength-1);
     expect(scope.centrePileCards.length).toBe(oldLengthCentre+1);
-    console.log(' new length player',scope.playerCards.length);
-    console.log('new length centre',scope.centrePileCards.length);
   });
 
   it('should pick one card from own pile and add to centrepile as player starting with 1 card',function(){
@@ -97,22 +93,52 @@ describe('main ctrl tests', function() {
   });
 
 
-  //it('should pick one card from own pile and add to centrepile automatically when cpu',function(){
-  //  var controller = createController();
-  //  spyOn(scope,'pickCard')
-  //  scope.playerTurn=0;
-  //  scope.switchTurns();
-  //  expect(scope.pickCard).toHaveBeenCalled();
-  //});
+  it('should pick one card from own pile and add to centrepile automatically when cpu',function(){
+    var controller = createController();
+    spyOn(scope,'pickCard')
+    scope.playerTurn=0;
+    scope.switchTurns();
+    expect(scope.pickCard).toHaveBeenCalled();
+  });
 
   it('should switch turns',function(){
     var controller = createController();
     scope.playerTurn=0;
     scope.switchTurns();
-    console.log('playerTurn',scope.playerTurn);
     expect(scope.playerTurn).toBe(true);
   });
 
+  it('should return the same amount of cards after shuffle for cpu',function(){
+    var controller = createController();
+    scope.playerTurn=1;
+    scope.dealCards();
+    var allCards = scope.cpuCards.concat(scope.playerCards);
+    var result=scope.shuffle(allCards);
+    expect(result.length).toBe(51);
+  });
 
+  it('should call snap for and player wins',function(){
+    var controller = createController();
+    scope.centrePileCards = [{number: 6, suit: 'h'},{number: 3, suit: 'h'}];
+    scope.playerTurn=0;
+    scope.reactionTimeCpu=20000;
+    scope.hitCentrePile();
+    expect(scope.snap).toBe(true);
+    expect(scope.playerTurn).toBe(0);
+    expect(scope.centrePileCards.length).toBe(0);
+    expect(scope.playerCards.length).toBe(2);
+  });
+
+  it('should call snap for and cpu wins',function(){
+    var controller = createController();
+    scope.centrePileCards = [{number: 6, suit: 'h'},{number: 3, suit: 'h'}];
+    scope.playerTurn=1;
+    scope.reactionTimeCpu=200;
+    scope.hitCentrePile();
+    expect(scope.snap).toBe(true);
+    expect(scope.playerTurn).toBe(1);
+    expect(scope.centrePileCards.length).toBe(0);
+    expect(scope.cpuCards.length).toBe(2);
+  });
 
 });

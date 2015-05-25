@@ -29,3 +29,5 @@
         redirectTo: '/'
       });
   });
+
+app.constant('_',window._);

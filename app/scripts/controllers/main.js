@@ -1,14 +1,23 @@
 'use strict';
 
-app.controller('MainCtrl', function ($scope,$timeout) {
+app.controller('MainCtrl', function ($scope,$timeout,_) {
 
   $scope.playerCards = [];
   $scope.cpuCards = [];
   $scope.centrePileCards = [];
   $scope.playerTurn = null;
+  $scope.snap=false;
+  $scope.reactionTimeCpu=0;
 
   ///start of game
   //
+  $scope.startGame= function(){
+    $scope.snap=false;
+    //choose random player
+    $scope.playerTurn = Math.random() > 0.5 ? 1 : 0;
+    $scope.dealCards();
+  }
+
   $scope.dealCards = function () {
 
     //reset all cards
@@ -16,42 +25,46 @@ app.controller('MainCtrl', function ($scope,$timeout) {
     $scope.cpuCards = [];
     $scope.centrePileCards = [];
 
-    console.log('dealcards start');
-
     var nrs = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-    var suits = ['c', 'h'];
+    var suits = ['c', 'h','s','d'];
 
-    nrs.forEach(function (nr) {
-      suits.forEach(function (st) {
-        $scope.playerCards.push({number: nr, suit: st})
+    var i=1;
+
+    $scope.shuffle(nrs).forEach(function (nr) {
+      $scope.shuffle(suits).forEach(function (st) {
+        if (i<27) {
+          $scope.playerCards.push({number: nr, suit: st})
+        }
+        else
+        {
+          $scope.cpuCards.push({number: nr, suit: st})
+        }
+        i++;
       });
     });
 
-
-    var nrsc = ['A', 'J', '10', '6', '5', '7', '8', '9', '4', '3', 'Q', 'K', '2'];
-    var suitsc = ['s', 'd'];
-
-    nrsc.forEach(function (nr) {
-      suitsc.forEach(function (st) {
-        $scope.cpuCards.push({number: nr, suit: st})
-      });
-    });
-
-    //debugger;
-
-    //choose random player
-    $scope.playerTurn = Math.random() > 0.5 ? 1 : 0;
-
-    //when the player is cpu trigger a pickcard
+     //when the player is cpu trigger a pickcard
     if ($scope.playerTurn) {
       $scope.pickCard();
     }
 
-    console.log('player cards len', $scope.playerCards.length);
-    console.log('cpu cards len', $scope.cpuCards.length);
   }
 
+  //shuffle the cards
+  $scope.shuffle = function(array) {
+    var m = array.length, t, i;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+    return array;
+  }
+
+
   //playerTurn p (integer ) picks card from their pile and places it on centre pile
+  //turns are switched with delay
   $scope.pickCard = function() {
     //if player
 
@@ -70,20 +83,53 @@ app.controller('MainCtrl', function ($scope,$timeout) {
   //2 sec delay to see the card
     $timeout(function(){
       $scope.switchTurns();
-    },1000);
+    },2000);
 
   }
 
   //switch turns
   $scope.switchTurns = function () {
-    $scope.playerTurn = !$scope.playerTurn;
-    console.log($scope.centrePileCards.length);
 
+    $scope.playerTurn = !$scope.playerTurn;
     //when the player is cpu trigger a pickcard
    if ($scope.playerTurn)
    {
-    $scope.pickCard();
+      $scope.pickCard();
+     $timeout(function(){
+       $scope.hitCentrePile();
+     },$scope.reactionTimeCpu);
+
    }
+  }
+
+  //check whether snap is true?
+  $scope.hitCentrePile = function(){
+    //debugger;
+    if ($scope.centrePileCards.length > 0) {
+      if ($scope.centrePileCards[0].suit == $scope.centrePileCards[1].suit) {
+        $scope.snap = true;
+        if ($scope.playerTurn)
+        {
+          debugger;
+          $scope.cpuCards=_.union($scope.cpuCards,$scope.centrePileCards);
+          $scope.winner='CPU calls snap';
+        }
+        else
+        {
+
+          $scope.playerCards=_.union($scope.playerCards,$scope.centrePileCards);
+          $scope.winner='player calls snap';
+        }
+        $scope.centrePileCards=[];
+      }
+    }
+  }
+
+  $scope.SnapTest= function(){
+    $scope.centrePileCards = [{number: 6, suit: 'h'},{number: 3, suit: 'h'}];
+    $scope.playerTurn=1;
+    $scope.reactionTimeCpu=10;
+    $scope.hitCentrePile();
   }
 
 
