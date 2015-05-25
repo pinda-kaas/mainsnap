@@ -32,6 +32,12 @@ module.exports = function(config) {
       'test/spec/**/*.js'
     ],
 
+    preprocessors : {
+      'app/**/*.js': ['coverage']
+    },
+
+    reporters: ['progress', 'coverage'],
+
     // list of files / patterns to exclude
     exclude: [],
 
@@ -53,6 +59,7 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
+      'karma-coverage',
       'karma-jasmine'
     ],
 

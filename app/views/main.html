@@ -1,41 +1,31 @@
-<link rel="stylesheet" href="styles/main.css">
+<header>
+  <h1 ng-show="snap">{{winner}}</h1>
+</header>
+
+<div>cucards {{cpuCards}}</div>
+<div>centrePileCards{{centrePileCards}}</div>
+<div>playercards {{playerCards}}</div>
 
 <section id="game-table">
-
-  <header>
-    <h1 ng-show="snap">{{winner}}</h1>
-
-  </header>
-
-  <div class="row">
-
-    cpucards{{cpuCards}}
-    <!--cpu cards-->
-    <div ng-class="{turn:playerTurn,noturn:!playerTurn}">cpu</div>
-
-
-   centrecards {{centrePileCards}}
-    <!--centrepile-->
-    <div class="centre" ng-click="hitCentrePile()">
-      <h1>{{centrePileCards[0].number}}</h1>
-      <img
-        ng-class="{'spade':centrePileCards[0].suit=='s','heart':centrePileCards[0].suit=='h','diamond':centrePileCards[0].suit=='d','club':centrePileCards[0].suit=='c'}"/>
-    </div>
-
-    playercards{{playerCards}}
-    <!--player cards-->
-    <div ng-class="{turn:!playerTurn,noturn:playerTurn}" ng-click="pickCard();">player</div>
+  <!--cpu cards-->
+  <div ng-class="{turn:playerTurn,noturn:!playerTurn}">cpu</div>
+  <!--centrepile-->
+  <div class="centre" ng-click="checkSnapTakeCentrePile()">
+    <h1>{{centrePileCards[0].number}}</h1>
+    <img
+      ng-class="{'spade':centrePileCards[0].suit=='s','heart':centrePileCards[0].suit=='h','diamond':centrePileCards[0].suit=='d','club':centrePileCards[0].suit=='c'}"/>
   </div>
-
+  <!--player cards-->
+  <div ng-class="{turn:!playerTurn,noturn:playerTurn}" ng-click="placeCardCentrePile();">player</div>
 </section>
+
+
 
 <section id="game-controls">
-
-  <button>Check snap</button>
-  <button ng-click="startGame()">start</button>
-  <button ng-click="SnapTest()">snap test</button>
-
+  <button class="btn btn-warning startbtn" ng-click="startGame()">Start game</button>
+  <input id="slider" type="range" min="0" max="10000" step="1000" ng-model="reactionTimeCpu"/>
+  <button ng-click="testGame()">test</button>
 </section>
 
 
-<section>slider</section>
+
