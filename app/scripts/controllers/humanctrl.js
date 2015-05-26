@@ -5,36 +5,30 @@ app.controller('HumanCtrl', function ($scope,$state,$timeout,$stateParams) {
 
   console.log('start humanctrl');
 
-  $scope.playerCards = JSON.parse(localStorage.getItem('playerCards'));
-  $scope.cpuCards = JSON.parse(localStorage.getItem('cpuCards'));
-  $scope.centrePileCards = JSON.parse(localStorage.getItem('centrePileCards'));
+  var allCards = JSON.parse($stateParams.parms);
+
+  $scope.playerTurn=0;
 
   $scope.placeCardCentrePile = function () {
-    if ($scope.playerCards.length > 0) {
-      $scope.centrePileCards.unshift($scope.playerCards[0]);
-      $scope.playerCards.splice(0, 1)
+    if (allCards[0].length > 0) {
+      allCards[2].unshift(allCards[0][0]);
+      allCards[0].splice(0, 1)
     }
+
+    //go to cpu state
+    $timeout(function(){$state.go('cpu');},1000);
+
   }
 
   $scope.checkSnap=function() {
-    console.log('centrepilecards:',$scope.centrePileCards);
-    //if ($scope.centrePileCards.length > 1 && $scope.centrePileCards[0].suit == $scope.centrePileCards[1].suit) {
+    console.log('allCards[2]:',allCards[2]);
+    if ($scope.allCards[2].length > 1 && $scope.allCards[2][0].suit == $scope.allCards[2][1].suit) {
     //call snap
     $state.go('snap', {player: 'human'});
-  //}
   }
-
+  }
   $scope.placeCardCentrePile();
 
   $scope.checkSnap();
 
-  localStorage.setItem('playerCards',JSON.stringify($scope.playerCards));
-  localStorage.setItem('cpuCards',JSON.stringify($scope.cpuCards));
-  localStorage.setItem('centrePileCards',JSON.stringify($scope.centrePileCards));
-
-  //go to cpu state
-  $timeout(function(){
-    $state.go('cpu');
-  },1000);
-
-});
+  });

@@ -16,12 +16,16 @@
       ng-class="{'spade':centrePileCards[0].suit=='s','heart':centrePileCards[0].suit=='h','diamond':centrePileCards[0].suit=='d','club':centrePileCards[0].suit=='c'}"/>
   </div>
   <!--player cards-->
-  <div ng-class="{turn:!playerTurn,noturn:playerTurn}" ui-sref="player">player</div>
+  <div ng-class="{turn:!playerTurn,noturn:playerTurn}" ui-sref="human">player</div>
 </section>
 
+
 <section id="game-controls">
-  <button class="btn btn-warning startbtn" ui-sref="startgame">Start game</button>
+
+  <button class="btn btn-warning startbtn" ui-sref='startgame'>Start game</button>
+
   <input id="slider" type="range" min="0" max="10000" step="1000" ng-model="reactionTimeCpu"/>
+
   <button ng-click="testGame()">test</button>
 </section>
 

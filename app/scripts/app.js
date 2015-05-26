@@ -10,11 +10,10 @@ app.config(['$stateProvider', function ($stateProvider) {
       templateUrl: '/views/game.html',
       controller: 'StartGameCtrl'
     })
-    .state("human", {
-      url: "/",
+    .state("person", {
+      url: "/:parms",
       templateUrl: '/views/game.html',
       controller: 'HumanCtrl'
-
     })
     .state("snap", {
       url: "/:player",
@@ -34,9 +33,9 @@ app.config(['$stateProvider', function ($stateProvider) {
 }]);
 
 app.run(['$rootScope', '$state', '$stateParams', function ($rootScope,   $state, $stateParams) {
-  $rootScope.$state = $state;
-  $rootScope.$stateParams = $stateParams;
+  debugger;
   $state.go('startgame');
+  console.log('app.run');
 }]);
 
 app.constant('_', window._);
