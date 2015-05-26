@@ -1,5 +1,5 @@
 <header>
-  <h1 ng-show="snapOccurred">{{winner}}</h1>
+  <h1>{{winner}}</h1>
 </header>
 
 <div>cucards {{cpuCards}}</div>
@@ -10,7 +10,7 @@
   <!--cpu cards-->
   <div ng-class="{turn:playerTurn,noturn:!playerTurn}">cpu</div>
   <!--centrepile-->
-  <div class="centre" ng-click="ui-sref('snap')">
+  <div class="centre" ng-click="checkSnap()">
     <h1>{{centrePileCards[0].number}}</h1>
     <img
       ng-class="{'spade':centrePileCards[0].suit=='s','heart':centrePileCards[0].suit=='h','diamond':centrePileCards[0].suit=='d','club':centrePileCards[0].suit=='c'}"/>
@@ -19,10 +19,8 @@
   <div ng-class="{turn:!playerTurn,noturn:playerTurn}" ui-sref="player">player</div>
 </section>
 
-
-
 <section id="game-controls">
-  <button class="btn btn-warning startbtn" ng-click="startGame()">Start game</button>
+  <button class="btn btn-warning startbtn" ui-sref="startgame">Start game</button>
   <input id="slider" type="range" min="0" max="10000" step="1000" ng-model="reactionTimeCpu"/>
   <button ng-click="testGame()">test</button>
 </section>

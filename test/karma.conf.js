@@ -27,9 +27,10 @@ module.exports = function(config) {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/underscore/underscore-min.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
       'app/scripts/**/*.js',
-      'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      'app/scripts/controllers/*.js',
+      'test/spec/**/*.spec.js'
     ],
 
     preprocessors : {

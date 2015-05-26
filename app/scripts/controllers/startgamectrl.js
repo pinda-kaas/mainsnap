@@ -1,65 +1,66 @@
 'use strict';
 
-app.controller('MainCtrl', function ($scope, $timeout, _,$state) {
+app.controller('StartGameCtrl', function ($scope, $timeout, $state) {
 
   $scope.playerCards = [];
   $scope.cpuCards = [];
   $scope.centrePileCards = [];
   $scope.playerTurn = null;
   $scope.snap = false;
-  $scope.reactionTimeCpu = 20;
+  $scope.reactionTimeCpu = 20000;
 
   console.log('start mainctrl');
 
-  ///start of game
-  //initialize variables
-  //dealcards
-  //trigger card placement if player is cpu
-  $scope.startGame = function () {
+  $scope.startGame = function (p) {
+
     $scope.snap = false;
-    //choose random player
-    $scope.playerTurn = Math.random() > 0.5 ? 1 : 0;
-    $scope.dealCards();
 
-    if ($scope.playerTurn) {
-      $state.go('cpu');
+    //$scope.dealCards(['2','3','4','5','6','7','8','9','10','J','Q','K','A'],['s','h','d','c']);
+    $scope.dealCards(['2','3'],['s','h']);
+
+    if (p) {debugger;
+      $state.go('cpu')
+    } else {
+      $state.go('human');
     }
-
   }
 
-  $scope.dealCards = function () {
-    //reset all cards
+  $scope.dealCards = function (nrs,suits) {
+    var cards=[];
 
-     $scope.playerCards = [{number: 6, suit: 'h'},{number: 3, suit: 's'}];
-    $scope.cpuCards= [{number: 2, suit: 'h'},{number: 8, suit: 's'}];
     $scope.centrePileCards = [];
 
+    localStorage.setItem('playerCards', JSON.stringify($scope.playerCards));
+    localStorage.setItem('cpuCards', JSON.stringify($scope.cpuCards));
+    localStorage.setItem('centrePileCards', JSON.stringify($scope.centrePileCards));
 
-    localStorage.setItem('playerCards',JSON.stringify($scope.playerCards));
-    localStorage.setItem('cpuCards',JSON.stringify($scope.cpuCards));
-    localStorage.setItem('centrePileCards',JSON.stringify($scope.centrePileCards));
+    nrs.forEach(function (nr) {
+      suits.forEach(function (st) {
+        cards.push({number: nr, suit: st})
+      });
+    });
 
-    ////var nrs = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-    ////var suits = ['c', 'h', 's', 'd'];
-    //var nrs = ['2', '3'];
-    //var suits = ['c', 'h'];
-    //
-    //var i = 1;
-    //
-    //nrs.forEach(function (nr) {
-    //
-    //  suits.forEach(function (st) {
-    //    if (i ==1) {
-    //      $scope.playerCards.push({number: nr, suit: st})
-    //    }
-    //    else {
-    //      $scope.cpuCards.push({number: nr, suit: st})
-    //    }
-    //  });
-    //  i++;
-    //});
-    //console.log('cpuCards.length',$scope.cpuCards.length);
-    //console.log('playerCards.length',$scope.playerCards.length);
+    //shuffle the cards
+    var shuf = $scope.shuffle(cards);
+
+    console.log(shuf,'shuffled cards');
+
+
+    //divide into player and cpu cards
+    $scope.playerCards = shuf.slice(0,shuf.length/2);
+    console.log(shuf.length, 's length');
+    console.log(cards.length, 'c length');
+
+    $scope.cpuCards = shuf.slice(shuf.length/2,shuf.length);
+
+    console.log('cpuCards.length',$scope.cpuCards.length);
+    console.log('playerCards.length',$scope.playerCards.length);
+
+    localStorage.setItem('playerCards', JSON.stringify($scope.playerCards));
+    localStorage.setItem('cpuCards', JSON.stringify($scope.cpuCards));
+    localStorage.setItem('centrePileCards', JSON.stringify($scope.centrePileCards));
+
+
 
   }
 
@@ -75,7 +76,11 @@ app.controller('MainCtrl', function ($scope, $timeout, _,$state) {
     return array;
   }
 
-  $scope.startGame();
+
+  //choose random player to start
+  $scope.playerTurn = Math.random() > 0.5 ? 1 : 0;
+
+  $scope.startGame($scope.playerTurn);
 
 //
 //  //playerTurn p (integer ) picks card from their pile and places it on centre pile

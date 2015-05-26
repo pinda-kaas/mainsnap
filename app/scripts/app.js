@@ -8,15 +8,15 @@ app.config(['$stateProvider', function ($stateProvider) {
     .state("startgame", {
       url: "/",
       templateUrl: '/views/game.html',
-      controller: 'MainCtrl'
+      controller: 'StartGameCtrl'
     })
-    .state("player", {
+    .state("human", {
       url: "/",
       templateUrl: '/views/game.html',
       controller: 'PlayerCtrl'
     })
     .state("snap", {
-      url: "/",
+      url: "/:player",
       templateUrl: '/views/game.html',
       controller: 'SnapCtrl'
     })
@@ -24,6 +24,11 @@ app.config(['$stateProvider', function ($stateProvider) {
       url: "/",
       templateUrl: '/views/game.html',
       controller: 'CpuCtrl'
+    })
+    .state("gameover", {
+      url: "/:winner",
+      templateUrl: '/views/game.html',
+      controller: 'GameOverCtrl'
     });
 }]);
 

@@ -16,6 +16,13 @@ app.controller('PlayerCtrl', function ($scope,$state,$timeout) {
     }
   }
 
+  $scope.checkSnap=function(){
+    if ($scope.centrePileCards.length > 1 && $scope.centrePileCards[0].suit == $scope.centrePileCards[1].suit) {
+      //call snap
+      $state.go('snap',{ player: 'player' });
+    }
+  }
+
   $scope.placeCardCentrePile();
 
   localStorage.setItem('playerCards',JSON.stringify($scope.playerCards));
@@ -24,5 +31,5 @@ app.controller('PlayerCtrl', function ($scope,$state,$timeout) {
 
   $timeout(function(){
     $state.go('cpu');
-  },2000);
+  },1000);
 });

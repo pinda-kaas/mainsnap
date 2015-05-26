@@ -18,7 +18,7 @@
 <!-- Add your site or application content here -->
 <div class="container">
   <div class="header">
-    <h3 class="text-muted">Snap</h3>
+    <h3 class="text-muted">{{snapper}}</h3>
   </div>
 
   <section ui-view></section>
@@ -35,7 +35,6 @@
 
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
-
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -54,10 +53,12 @@
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
-<script src="scripts/controllers/mainctrl.js"></script>
+<script src="scripts/controllers/startgamectrl.js"></script>
 <script src="scripts/controllers/playerctrl.js"></script>
 <script src="scripts/controllers/cpuctrl.js"></script>
-<script src="scripts/controllers/snap.js"></script>
+<script src="scripts/controllers/snapctrl.js"></script>
+<script src="scripts/controllers/gameoverctrl.js"></script>
+
 
 
 
