@@ -1,9 +1,9 @@
 /**
  * Created by Dimitri on 26/05/2015.
  */
-app.controller('PlayerCtrl', function ($scope) {
+app.controller('PlayerCtrl', function ($scope,$state,$timeout) {
   console.log('start playerctrl');
-  debugger;
+
   $scope.playerCards = JSON.parse(localStorage.getItem('playerCards'));
   $scope.cpuCards = JSON.parse(localStorage.getItem('cpuCards'));
   $scope.centrePileCards = JSON.parse(localStorage.getItem('centrePileCards'));
@@ -18,4 +18,11 @@ app.controller('PlayerCtrl', function ($scope) {
 
   $scope.placeCardCentrePile();
 
+  localStorage.setItem('playerCards',JSON.stringify($scope.playerCards));
+  localStorage.setItem('cpuCards',JSON.stringify($scope.cpuCards));
+  localStorage.setItem('centrePileCards',JSON.stringify($scope.centrePileCards));
+
+  $timeout(function(){
+    $state.go('cpu');
+  },2000);
 });

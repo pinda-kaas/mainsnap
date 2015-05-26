@@ -15,6 +15,11 @@ app.config(['$stateProvider', function ($stateProvider) {
       templateUrl: '/views/game.html',
       controller: 'PlayerCtrl'
     })
+    .state("snap", {
+      url: "/",
+      templateUrl: '/views/game.html',
+      controller: 'SnapCtrl'
+    })
     .state("cpu", {
       url: "/",
       templateUrl: '/views/game.html',

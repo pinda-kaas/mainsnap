@@ -1,5 +1,5 @@
 <header>
-  <h1 ng-show="snap">{{winner}}</h1>
+  <h1 ng-show="snapOccurred">{{winner}}</h1>
 </header>
 
 <div>cucards {{cpuCards}}</div>
@@ -10,7 +10,7 @@
   <!--cpu cards-->
   <div ng-class="{turn:playerTurn,noturn:!playerTurn}">cpu</div>
   <!--centrepile-->
-  <div class="centre" ng-click="checkSnapTakeCentrePile()">
+  <div class="centre" ng-click="ui-sref('snap')">
     <h1>{{centrePileCards[0].number}}</h1>
     <img
       ng-class="{'spade':centrePileCards[0].suit=='s','heart':centrePileCards[0].suit=='h','diamond':centrePileCards[0].suit=='d','club':centrePileCards[0].suit=='c'}"/>
