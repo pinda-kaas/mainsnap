@@ -1,16 +1,16 @@
 /**
  * Created by Dimitri on 26/05/2015.
  */
-app.controller('CpuCtrl', function ($scope, $state, $timeout) {
+app.controller('CpuCtrl', function ($scope, $state, $timeout,$stateParams) {
 
     console.log('start cpuctrl');
 
-    $scope.playerCards = JSON.parse(localStorage.getItem('playerCards'));
-    $scope.cpuCards = JSON.parse(localStorage.getItem('cpuCards'));
-    $scope.centrePileCards = JSON.parse(localStorage.getItem('centrePileCards'));
+    var allCards = JSON.parse($stateParams.parms);
+
+    debugger;
 
     $scope.placeCardCentrePile = function () {
-      if ($scope.cpuCards.length > 0) {
+      if (allCards[1].length > 0) {
         $scope.centrePileCards.unshift($scope.cpuCards[0]);
         $scope.cpuCards.splice(0, 1)
       }
@@ -24,7 +24,7 @@ app.controller('CpuCtrl', function ($scope, $state, $timeout) {
 
       if ($scope.playerCards.length == 0 )
       {
-        $state.go('gameover',{ winner: 'player' });
+        $state.go('gameover',{ winner: 'human' });
       }
     }
 

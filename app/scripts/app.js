@@ -13,7 +13,8 @@ app.config(['$stateProvider', function ($stateProvider) {
     .state("human", {
       url: "/",
       templateUrl: '/views/game.html',
-      controller: 'PlayerCtrl'
+      controller: 'HumanCtrl'
+
     })
     .state("snap", {
       url: "/:player",
@@ -21,7 +22,7 @@ app.config(['$stateProvider', function ($stateProvider) {
       controller: 'SnapCtrl'
     })
     .state("cpu", {
-      url: "/",
+      url: "/:parms",
       templateUrl: '/views/game.html',
       controller: 'CpuCtrl'
     })
