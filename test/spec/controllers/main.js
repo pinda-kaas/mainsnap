@@ -13,9 +13,9 @@ describe('snap tests', function() {
 
 
   it('startGame should call dealcards', function() {
-    spyOn(scope,'dealCards');
     var controller = createController();
-
+    spyOn(scope,'dealCards');
+    scope.startGame();
     expect(scope.dealCards).toHaveBeenCalled();
   });
 
@@ -127,7 +127,7 @@ describe('snap tests', function() {
     expect(result.length).toBe(51);
   });
 
-  it('call snap for and player takes centrepile',function(){
+  it('checkSnapTakeCentrePile player takes centrepile',function(){
     var controller = createController();
     scope.centrePileCards = [{number: 6, suit: 'h'},{number: 3, suit: 'h'}];
     scope.playerTurn=0;
@@ -164,7 +164,7 @@ describe('snap tests', function() {
     var controller = createController();
     scope.cpuCards=[{number: 6, suit: 'h'},{number: 6, suit: 's'}];
     scope.playerCards=[];
-    scope.playerTurn=1;
+    scope.playerTurn=0;
     scope.checkWinner();
     expect(scope.winner).toEqual('CPU wins the game!!');
   });
@@ -180,10 +180,13 @@ describe('snap tests', function() {
   });
 
   it('cpu gets snap and wins',function(){
-    scope.centrePileCards = [{number: 6, suit: 'h'},{number: 3, suit: 'h'}];
+    var controller = createController();
+    scope.centrePileCards =[{number: 6, suit: 'h'},{number: 3, suit: 'h'}];
+    scope.cpuCards=[];
+    scope.playerCards=[];
     scope.playerTurn=1;
-    scope.reactionTimeCpu=200;
-    scope.checkSnapTakeCentrePile();
+    scope.checkSnapTakeCentrePile()
+    expect(scope.winner).toBe('CPU calls snap');
     expect(scope.snap).toBe(true);
 
   })

@@ -1,19 +1,31 @@
 'use strict';
 
- var app=angular
-  .module('snapApp', [
-    'ngRoute'
-   ]);
+var app = angular
+  .module('snapApp', ['ui.router']);
 
-  app.config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+app.config(['$stateProvider', function ($stateProvider) {
+  $stateProvider
+    .state("startgame", {
+      url: "/",
+      templateUrl: '/views/game.html',
+      controller: 'MainCtrl'
+    })
+    .state("player", {
+      url: "/",
+      templateUrl: '/views/game.html',
+      controller: 'PlayerCtrl'
+    })
+    .state("cpu", {
+      url: "/",
+      templateUrl: '/views/game.html',
+      controller: 'CpuCtrl'
+    });
+}]);
 
-app.constant('_',window._);
+app.run(['$rootScope', '$state', '$stateParams', function ($rootScope,   $state, $stateParams) {
+  $rootScope.$state = $state;
+  $rootScope.$stateParams = $stateParams;
+  $state.go('startgame');
+}]);
+
+app.constant('_', window._);
