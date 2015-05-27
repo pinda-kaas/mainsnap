@@ -8,8 +8,10 @@
     <file url="file://$PROJECT_DIR$/app/scripts/controllers/humanctrl.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/scripts/controllers/snapctrl.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/scripts/controllers/startgamectrl.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/scripts/controllers/testcontroller.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/styles/main.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/game.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/test.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/test/karma.conf.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/test/spec/controllers/humanctrl.spec.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/test/spec/controllers/main.jsold" charset="UTF-8" />

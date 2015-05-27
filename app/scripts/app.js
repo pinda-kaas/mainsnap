@@ -5,37 +5,41 @@ var app = angular
 
 app.config(['$stateProvider', function ($stateProvider) {
   $stateProvider
-    .state("startgame", {
+    .state("home", {
       url: "/",
       templateUrl: '/views/game.html',
       controller: 'StartGameCtrl'
     })
-    .state("person", {
-      url: "/:parms",
+    .state("start", {
+      url: "/start",
+      templateUrl: '/views/game.html',
+      controller: 'StartGameCtrl'
+    })
+    .state("human", {
+      url: "/human/:parms",
       templateUrl: '/views/game.html',
       controller: 'HumanCtrl'
     })
     .state("snap", {
-      url: "/:player",
+      url: "/snap/:cards",
       templateUrl: '/views/game.html',
       controller: 'SnapCtrl'
     })
     .state("cpu", {
-      url: "/:parms",
+      url: "cpu/:parms",
       templateUrl: '/views/game.html',
       controller: 'CpuCtrl'
     })
     .state("gameover", {
-      url: "/:winner",
+      url: "gameover/:winner",
       templateUrl: '/views/game.html',
       controller: 'GameOverCtrl'
     });
 }]);
 
 app.run(['$rootScope', '$state', '$stateParams', function ($rootScope,   $state, $stateParams) {
-  debugger;
-  $state.go('startgame');
-  console.log('app.run');
+  $state.go('start');
+
 }]);
 
 app.constant('_', window._);

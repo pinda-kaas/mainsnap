@@ -6,23 +6,31 @@
 <div>centrePileCards{{centrePileCards}}</div>
 <div>playercards {{playerCards}}</div>
 
+reactiontime:{{reactionTimeCpu}}
+
+<h1>{{snapper}}</h1>
+
 <section id="game-table">
+
   <!--cpu cards-->
   <div ng-class="{turn:playerTurn,noturn:!playerTurn}">cpu</div>
+
   <!--centrepile-->
   <div class="centre" ng-click="checkSnap()">
-    <h1>{{centrePileCards[0].number}}</h1>
+    <h1>{{centrePileCards[0].number}}</h1>testing{{centrePileCards[0].suit}}
     <img
       ng-class="{'spade':centrePileCards[0].suit=='s','heart':centrePileCards[0].suit=='h','diamond':centrePileCards[0].suit=='d','club':centrePileCards[0].suit=='c'}"/>
   </div>
+
+
   <!--player cards-->
-  <div ng-class="{turn:!playerTurn,noturn:playerTurn}" ui-sref="human">player</div>
+  <div ng-class="{turn:!playerTurn,noturn:playerTurn}" ng-click="placeCardCentrePile()">player</div>
 </section>
 
 
 <section id="game-controls">
 
-  <button class="btn btn-warning startbtn" ui-sref='startgame'>Start game</button>
+  <button class="btn btn-warning startbtn" ui-sref='home'>Start game</button>
 
   <input id="slider" type="range" min="0" max="10000" step="1000" ng-model="reactionTimeCpu"/>
 

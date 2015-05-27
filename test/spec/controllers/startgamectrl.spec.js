@@ -16,12 +16,13 @@ describe('startgame state tests', function() {
 
   it('game should go to cpu state', function () {
     var controller = createController();
-    spyOn(scope, 'dealCards');
-
-    scope.startGame(0);
-    expect(state.go).toHaveBeenCalledWith('cpu');
-    //expect(scope.dealCards).toHaveBeenCalled();
+    spyOn(scope, 'startGame');
+    scope.startGame(0,['2','3'],['s','h']);
+    expect(state.go).toHaveBeenCalled();
+    expect(scope.startGame).toHaveBeenCalled();
   });
+
+
 
   //it('game should go to human state', function () {
   //  var controller = createController();

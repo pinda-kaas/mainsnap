@@ -5,11 +5,12 @@ app.controller('StartGameCtrl', function ($scope, $timeout, $state) {
   $scope.playerCards = [];
   $scope.cpuCards = [];
   var allCards= [];
-  console.log('startgame ctrl init');
 
+  $scope.centrePileCards=[];
 
-  //deals cards and goes to
+  //deals cards and goes to either cpu or human state
   $scope.startGame = function (p,nrs,suits) {
+    var cards=[];
     $scope.snap = false;
     nrs.forEach(function (nr) {
       suits.forEach(function (st) {
@@ -29,12 +30,16 @@ app.controller('StartGameCtrl', function ($scope, $timeout, $state) {
     //centrepile
     allCards.push([]);
 
-    if (p) {
-      $state.go('cpu', {parms:JSON.stringify(allCards)});
-    }
-    else {
-      $state.go('human', {parms:JSON.stringify(allCards)});
-    }
+    $scope.centrePileCards=allCards;
+
+    //debugger;
+    //if (p) {
+    //  $state.go('cpu', {parms:JSON.stringify(allCards)});
+    //}
+    //else {
+    $state.go('human', {parms:JSON.stringify(allCards)});
+    //
+    //}
   }
 
   //shuffle the cards
@@ -52,6 +57,6 @@ app.controller('StartGameCtrl', function ($scope, $timeout, $state) {
   //choose random player to start
   $scope.playerTurn = Math.random() > 0.5 ? 1 : 0;
 
-  $scope.startGame($scope.playerTurn,['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'], ['s', 'h', 'd', 'c']);
-  //$scope.dealCards(['2','3'],['s','h']);
+  //$scope.startGame($scope.playerTurn,['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'], ['s', 'h', 'd', 'c']);
+  $scope.startGame($scope.playerTurn,['2','3'], ['s','s']);
 });

@@ -2,21 +2,20 @@
 
 app.controller('GameOverCtrl', function ($scope, $timeout, _, $state, $stateParams) {
 
-  $scope.playerCards = JSON.parse(localStorage.getItem('playerCards'));
-  $scope.cpuCards = JSON.parse(localStorage.getItem('cpuCards'));
-  $scope.centrePileCards = JSON.parse(localStorage.getItem('centrePileCards'));
-
   console.log('start gameoverctrl', $stateParams);
-  if ($stateParams.winner=='c') {
+
+  if ($stateParams.winner=='cpu') {
     $scope.winner = 'CPU wins the game!!!';
   }
-  else {
+
+  if ($stateParams.winner=='player') {
     $scope.winner = 'Player wins the game!!!';
   }
 
-  localStorage.setItem('playerCards',JSON.stringify($scope.playerCards));
-  localStorage.setItem('cpuCards',JSON.stringify($scope.cpuCards));
-  localStorage.setItem('centrePileCards',JSON.stringify($scope.centrePileCards));
+  if ($stateParams.winner=='draw') {
+    $scope.winner = 'It is a draw.';
+  }
+
 
 
 })
